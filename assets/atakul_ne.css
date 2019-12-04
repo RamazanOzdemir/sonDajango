@@ -1,0 +1,28 @@
+.slide_ii{
+    height: 200px;
+    width: 200px;
+
+}
+
+@media(max-width:720px){
+    .slide_ii{
+        height: 100px;
+        width: 200px;
+    }
+}
+
+.a {
+    height: 150px;
+    width: 300px;
+}
+
+.nav_link{
+    font-size: 21px;
+
+}
+.my_nav{
+    height: 120px;
+}
+.headMenu{
+    margin: 30px 0px;
+}
