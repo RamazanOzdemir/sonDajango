@@ -9,22 +9,27 @@
   </style>
 {% endblock %}
 {% block content %}
-<div class="conatiner">
-  <div class="slider">
-    <ul class="slides" 
+<div class="conatiner"  style="border-top:5px solid black;padding-top: 0px;">
+  <div class="slideshow-container" >
+ 
       {% for slide in slides %}
-        <li class="row grey darken-4">
-        <img src="{{slide.slideImage.url}}"
-         alt="{{slide.slideImage}}" 
-         class="responsive-img col s10 l4 push-l6  push-s1" 
-         style="height:150px; width:300px;margin-top:100px;"> <!-- random image -->
-        <div class="{{slide.captionStyle}}">
-          <h4 class="col s2 ">{{slide.caption}}</h4>
-        </div>
-      </li>
-      {% endfor %}
+      <div class="mySlides fade row">
+        <img class="aa " src="{{slide.slideImage.url}}" alt='{{slide.slideImage}}' >
+        <div class="text__block"><h5>{{slide.caption }}</h5></div>
+      </div>
 
-    </ul>
+      {% endfor %}
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    
+  </div>
+  <br>
+
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+    {% for slide in slides %}
+    <span class="dot" onclick="currentSlide('{{ forloop.counter}}')"></span>
+    {% endfor %}
   </div>
   <div class="container" style="margin-top: 50px;">
     <div class="row">
@@ -96,6 +101,38 @@
     console.log(elems);
     var instances = M.Slider.init(elems, {});
   });
+  var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+var y = 0;
+setInterval(()=>{
+  plusSlides(1);
+},5000);
 
 </script>
 {% endblock %}
